@@ -1,8 +1,8 @@
 import java.util.Objects;
+import java.util.Random;
 
 public class Pokemon {
     private int PokeId;
-    private int id;
     private String Name;
     private String nickName;
     private int level;
@@ -21,34 +21,9 @@ public class Pokemon {
     private eggGroup eggGroup2;
     private heldItem item;
     private currentStatus currentStatus;
-
-
-    public Pokemon() {
-    }
-
-    public Pokemon(int PokeId, int id, String Name, String nickName, int level, Type type1, Type type2, Nature nature, IV iv, EV ev, Ability ability, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item, currentStatus currentStatus) {
-        this.PokeId = PokeId;
-        this.id = id;
-        this.Name = Name;
-        this.nickName = nickName;
-        this.level = level;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.nature = nature;
-        this.iv = iv;
-        this.ev = ev;
-        this.ability = ability;
-        this.ability1 = ability1;
-        this.ability2 = ability2;
-        this.hiddenAbility = hiddenAbility;
-        this.catchRate = catchRate;
-        this.genderRate = genderRate;
-        this.eggGroup1 = eggGroup1;
-        this.eggGroup2 = eggGroup2;
-        this.item = item;
-        this.currentStatus = currentStatus;
-    }
-
+    private int evoReq;
+    public int id = 0;
+    private Random rint;
     public int getPokeId() {
         return this.PokeId;
     }
@@ -67,6 +42,51 @@ public class Pokemon {
 
     public String getName() {
         return this.Name;
+    }
+
+    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, IV iv, EV ev, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item,int evoReq) {
+        this.PokeId = PokeId;
+        this.id = id += 1;
+        this.Name = Name;
+        this.nickName = Name;
+        this.level = level;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.nature = new Nature(23);
+        this.iv = iv;
+        this.ev = ev;
+        this.ability1 = ability1;
+        this.ability2 = ability2;
+        this.hiddenAbility = hiddenAbility;
+        this.catchRate = catchRate;
+        this.genderRate = genderRate;
+        this.eggGroup1 = eggGroup1;
+        this.eggGroup2 = eggGroup2;
+        this.item = item;
+        this.currentStatus = new currentStatus(level, nature, iv, ev);
+        this.evoReq = evoReq;
+    }
+
+    public Pokemon(int level, Nature nature, IV iv, EV ev) {
+        this.nickName = Name;
+        this.level = level;
+        this.nature = new Nature(23);
+        this.iv = iv;
+        this.ev = ev;
+    }
+
+
+    public int getEvoReq() {
+        return this.evoReq;
+    }
+
+    public void setEvoReq(int evoReq) {
+        this.evoReq = evoReq;
+    }
+
+    public Pokemon evoReq(int evoReq) {
+        setEvoReq(evoReq);
+        return this;
     }
 
     public void setName(String Name) {
@@ -350,5 +370,5 @@ public class Pokemon {
             ", currentStatus='" + getCurrentStatus() + "'" +
             "}";
     }
-    
+
 }

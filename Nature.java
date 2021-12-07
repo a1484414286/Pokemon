@@ -29,6 +29,22 @@ public class Nature {
         this.x = x;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+            " rint='" + getRint() + "'" +
+            ", nature='" + getNature() + "'" +
+            ", x='" + getX() + "'" +
+            ", HP='" + getHP() + "'" +
+            ", Attack='" + getAttack() + "'" +
+            ", Defense='" + getDefense() + "'" +
+            ", SpecialAttack='" + getSpecialAttack() + "'" +
+            ", SpecialDefense='" + getSpecialDefense() + "'" +
+            ", Speed='" + getSpeed() + "'" +
+            ", name='" + getName() + "'" +
+            "}";
+    }
+
     public double getHP() {
         return this.HP;
     }
@@ -107,6 +123,16 @@ public class Nature {
         this.SpecialDefense = 0;
         this.Speed = 0;
     }
+    public Nature(int i) {
+        this.x = rint.nextInt(i);
+        this.name =  nature[x];
+        this.HP = 0;
+        this.Attack = 0;
+        this.Defense = 0;
+        this.SpecialAttack = 0;
+        this.SpecialDefense = 0;
+        this.Speed = 0;
+    }
 
     public Nature() {
         this.x = rint.nextInt(nature.length);
@@ -121,30 +147,40 @@ public class Nature {
 
     
     public Nature verify(){
+        double p = 1.1;
+        double m = 0.9;
         switch(this.name){
             case "Lonely":
-                this.setAttack(1.1);
-                this.setDefense(0.9);
+                this.setAttack(p);
+                this.setDefense(m);
                 break;
             case "Adamant":
-                this.setAttack(1.1);
-                this.setSpecialAttack(0.9);
+                this.setAttack(p);
+                this.setSpecialAttack(m);
                 break;
             case "Naughty":
-                this.setAttack(1.1);
-                this.setSpecialDefense(0.9);
+                this.setAttack(p);
+                this.setSpecialDefense(m);
                 break;
             case "Brave":
-                this.setAttack(1.1);
-                this.setSpeed(0.9);
+                this.setAttack(p);
+                this.setSpeed(m);
                 break;
             case "Bold":
-                this.setDefense(1.1);
-                this.setAttack(0.9);
+                this.setDefense(p);
+                this.setAttack(m);
                 break;
+            case "Impish":
+                this.setDefense(p);
+                this.setSpecialDefense(m);
+
+            case 
             default : break;
         }
         return this;
     }
-
+    public static void main(String[] args) {
+        Nature a = new Nature();
+        System.out.println(a);
+    }
 }

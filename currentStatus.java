@@ -1,33 +1,33 @@
 import java.util.Objects;
 
 public class currentStatus extends Pokemon{
-    int HP;
-    int Attack;
-    int Defense;
-    int SpecialAttack;
-    int SpecialDefense;
-    int Speed;
-    int currentHP;
-    int currentAttack;
-    int currentDefense;
-    int currentSpecialAttack;
-    int currentSpecialDefense;
-    int currentSpeed;
+    private int HP;
+    private int Attack;
+    private int Defense;
+    private int SpecialAttack;
+    private int SpecialDefense;
+    private int Speed;
+    private int currentHP;
+    private int currentAttack;
+    private int currentDefense;
+    private int currentSpecialAttack;
+    private int currentSpecialDefense;
+    private int currentSpeed;
 
-    public currentStatus(int HP, int Attack, int Defense, int SpecialAttack, int SpecialDefense, int Speed, int currentHP, int currentAttack, int currentDefense, int currentSpecialAttack, int currentSpecialDefense, int currentSpeed) {
-        super();
+    public currentStatus(int Level, Nature nature, IV iv, EV ev) {
+        super(Level, nature, iv, ev);
         this.HP = ((2*super.getIv().getHP()+super.getEv().getHP()/4)*super.getLevel()/100)+super.getLevel()+10;
-        this.Attack = Attack;
-        this.Defense = Defense;
-        this.SpecialAttack = SpecialAttack;
-        this.SpecialDefense = SpecialDefense;
-        this.Speed = Speed;
-        this.currentHP = currentHP;
-        this.currentAttack = currentAttack;
-        this.currentDefense = currentDefense;
-        this.currentSpecialAttack = currentSpecialAttack;
-        this.currentSpecialDefense = currentSpecialDefense;
-        this.currentSpeed = currentSpeed;
+        this.Attack = super.getIv().getAttack();
+        this.Defense = super.getIv().getDefense();
+        this.SpecialAttack = super.getIv().getSpecialAttack();
+        this.SpecialDefense = super.getIv().getSpecialDefense();
+        this.Speed = super.getIv().getSpeed();
+        this.currentHP = HP;
+        this.currentAttack = Attack;
+        this.currentDefense = Defense;
+        this.currentSpecialAttack = SpecialAttack;
+        this.currentSpecialDefense = SpecialDefense;
+        this.currentSpeed = Speed;
     }
 
     public int getHP() {
@@ -202,6 +202,8 @@ public class currentStatus extends Pokemon{
         return Objects.hash(HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed, currentHP, currentAttack, currentDefense, currentSpecialAttack, currentSpecialDefense, currentSpeed);
     }
 
+
+
     @Override
     public String toString() {
         return "{" +
@@ -219,6 +221,5 @@ public class currentStatus extends Pokemon{
             ", currentSpeed='" + getCurrentSpeed() + "'" +
             "}";
     }
- 
     
 }

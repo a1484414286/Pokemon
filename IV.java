@@ -8,6 +8,7 @@ public class IV {
     int SpecialDefense;
     int Speed;
 
+
     public IV(int HP, int Attack, int Defense, int SpecialAttack, int SpecialDefense, int Speed) {
         this.HP = HP;
         this.Attack = Attack;
