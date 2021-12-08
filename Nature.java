@@ -134,12 +134,12 @@ public class Nature {
     public Nature() {
         this.x = rint.nextInt(nature.length);
         this.name = nature[this.x];
-        this.HP = 0;
-        this.Attack = 0;
-        this.Defense = 0;
-        this.SpecialAttack = 0;
-        this.SpecialDefense = 0;
-        this.Speed = 0;
+        this.HP = 1;
+        this.Attack = 1;
+        this.Defense = 1;
+        this.SpecialAttack = 1;
+        this.SpecialDefense = 1;
+        this.Speed = 1;
     }
 
     

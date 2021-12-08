@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class currentStatus extends Pokemon{
+public class currentStatus{
     private int HP;
     private int Attack;
     private int Defense;
@@ -14,27 +14,20 @@ public class currentStatus extends Pokemon{
     private int currentSpecialDefense;
     private int currentSpeed;
 
-    public currentStatus(int Level,Base base, Nature nature, IV iv, EV ev) {
-        super(Level, nature, iv, ev);
-        this.HP = ((2*super.getIv().getHP()+super.getEv().getHP()/4)*super.getLevel()/100)+super.getLevel()+10;
-        this.Attack =  (int)Math.floor((((((2*super.getBase().getAttack()+iv.getAttack()+(ev.getAttack()/4))*Level)/100)+5)*nature.getAttack()));
-        this.Defense = super.getIv().getDefense();
-        this.SpecialAttack = super.getIv().getSpecialAttack();
-        this.SpecialDefense = super.getIv().getSpecialDefense();
-        this.Speed = super.getIv().getSpeed();
-        this.currentHP = this.HP;
+    public currentStatus(int level,Base base, Nature nature, IV iv, EV ev) {
+        this.HP = ((2*iv.getHP()+ev.getHP()/4)*level/100)+level+10;
+        this.Attack =  (int)Math.floor((((((2*base.getAttack()+iv.getAttack()+(ev.getAttack()/4))*level)/100)+5)*nature.verify().getAttack()));
+        this.Defense = (int)Math.floor((((((2*base.getDefense()+iv.getDefense()+(ev.getDefense()/4))*level)/100)+5)*nature.verify().getDefense()));
+        this.SpecialAttack = (int)Math.floor((((((2*base.getSpecialAttack()+iv.getSpecialAttack()+(ev.getSpecialAttack()/4))*level)/100)+5)*nature.verify().getSpecialAttack()));;
+        this.SpecialDefense = (int)Math.floor((((((2*base.getSpecialDefense()+iv.getSpecialDefense()+(ev.getSpecialDefense()/4))*level)/100)+5)*nature.verify().getSpecialDefense()));
+        this.Speed = (int)Math.floor((((((2*base.getSpeed()+iv.getSpeed()+(ev.getSpeed()/4))*level)/100)+5)*nature.verify().getSpeed()));;
+        this.currentHP = HP;
         this.currentAttack = Attack;
         this.currentDefense = Defense;
         this.currentSpecialAttack = SpecialAttack;
         this.currentSpecialDefense = SpecialDefense;
         this.currentSpeed = Speed;
     }
-
-    // public int levelUp(int Base, int IV, int EV, int Level, Nature nature){
-    //     int i;
-    //     i =(int) Math.floor((((((2*Base+IV+(EV/4))*Level)/100)+5)*1.1));
-    //     return i;
-    // }
 
     public int getHP() {
         return this.HP;
@@ -227,5 +220,5 @@ public class currentStatus extends Pokemon{
             ", currentSpeed='" + getCurrentSpeed() + "'" +
             "}";
     }
-    
+
 }

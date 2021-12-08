@@ -37,8 +37,10 @@ public class Pokemon {
         this.level = level;
         this.type1 = type1;
         this.type2 = type2;
+        this.shiny = new Random().nextInt(ShinyRate) == 1 ? true : false; 
+        this.currentStatus = new currentStatus(level, base, nature, iv, ev);
         this.nature = new Nature(23);
-        this.iv = new IV();
+        this.iv = new IV(shiny);
         this.ev = ev;
         this.ability1 = ability1;
         this.ability2 = ability2;
@@ -48,8 +50,6 @@ public class Pokemon {
         this.eggGroup1 = eggGroup1;
         this.eggGroup2 = eggGroup2;
         this.item = item;
-        this.shiny = new Random().nextInt(ShinyRate) == 1 ? true : false; 
-        this.currentStatus = new currentStatus(level, base, nature, iv, ev);
         this.evoReq = evoReq;
     }
 

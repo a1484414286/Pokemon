@@ -10,7 +10,7 @@ public class IV {
     private int Speed;
 
     public IV(boolean shiny) {
-        this.HP = !shiny ? new Random().nextInt(32) : 20;
+        this.HP =  new Random().nextInt(32);
         this.Attack = new Random().nextInt(32);
         this.Defense = new Random().nextInt(32);
         this.SpecialAttack = new Random().nextInt(32);

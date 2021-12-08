@@ -16,6 +16,14 @@ public class EV{
         this.SpecialDefense = SpecialDefense;
         this.Speed = Speed;
     }
+    public EV() {
+        this.HP = 0;
+        this.Attack = 0;
+        this.Defense = 0;
+        this.SpecialAttack = 0;
+        this.SpecialDefense = 0;
+        this.Speed = 0;
+    }
 
     public int getHP() {
         return this.HP;
