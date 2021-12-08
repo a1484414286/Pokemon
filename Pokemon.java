@@ -1,5 +1,6 @@
 import java.util.Objects;
 import java.util.Random;
+import java.util.jar.Attributes.Name;
 
 public class Pokemon {
     private int PokeId;
@@ -9,6 +10,7 @@ public class Pokemon {
     private Type type1;
     private Type type2;
     private Nature nature;
+    private Base base;
     private IV iv;
     private EV ev;
     private Ability ability; 
@@ -23,26 +25,9 @@ public class Pokemon {
     private currentStatus currentStatus;
     private int evoReq;
     public int id = 0;
-    private Random rint;
-    public int getPokeId() {
-        return this.PokeId;
-    }
+    private boolean shiny;
+    public int ShinyRate = 2500;
 
-    public void setPokeId(int PokeId) {
-        this.PokeId = PokeId;
-    }
-
-    public int getId() {
-        return this.id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return this.Name;
-    }
 
     public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, IV iv, EV ev, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item,int evoReq) {
         this.PokeId = PokeId;
@@ -53,7 +38,7 @@ public class Pokemon {
         this.type1 = type1;
         this.type2 = type2;
         this.nature = new Nature(23);
-        this.iv = iv;
+        this.iv = new IV();
         this.ev = ev;
         this.ability1 = ability1;
         this.ability2 = ability2;
@@ -63,30 +48,49 @@ public class Pokemon {
         this.eggGroup1 = eggGroup1;
         this.eggGroup2 = eggGroup2;
         this.item = item;
-        this.currentStatus = new currentStatus(level, nature, iv, ev);
+        this.shiny = new Random().nextInt(ShinyRate) == 1 ? true : false; 
+        this.currentStatus = new currentStatus(level, base, nature, iv, ev);
         this.evoReq = evoReq;
     }
 
-    public Pokemon(int level, Nature nature, IV iv, EV ev) {
+
+
+    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item, currentStatus currentStatus, int evoReq, int id) {
+        this.PokeId = PokeId;
+        this.id = id+=1;
+        this.Name = Name;
         this.nickName = Name;
         this.level = level;
-        this.nature = new Nature(23);
+        this.type1 = type1;
+        this.type2 = type2;
+        this.nature = new Nature(24);
+        this.base = base;
         this.iv = iv;
         this.ev = ev;
-    }
-
-
-    public int getEvoReq() {
-        return this.evoReq;
-    }
-
-    public void setEvoReq(int evoReq) {
+        this.ability = ability;
+        this.ability1 = ability1;
+        this.ability2 = ability2;
+        this.hiddenAbility = hiddenAbility;
+        this.catchRate = catchRate;
+        this.genderRate = genderRate;
+        this.eggGroup1 = eggGroup1;
+        this.eggGroup2 = eggGroup2;
+        this.item = item;
+        this.currentStatus = currentStatus;
         this.evoReq = evoReq;
+        this.id = id;
     }
 
-    public Pokemon evoReq(int evoReq) {
-        setEvoReq(evoReq);
-        return this;
+    public int getPokeId() {
+        return this.PokeId;
+    }
+
+    public void setPokeId(int PokeId) {
+        this.PokeId = PokeId;
+    }
+
+    public String getName() {
+        return this.Name;
     }
 
     public void setName(String Name) {
@@ -131,6 +135,14 @@ public class Pokemon {
 
     public void setNature(Nature nature) {
         this.nature = nature;
+    }
+
+    public Base getBase() {
+        return this.base;
+    }
+
+    public void setBase(Base base) {
+        this.base = base;
     }
 
     public IV getIv() {
@@ -229,13 +241,24 @@ public class Pokemon {
         this.currentStatus = currentStatus;
     }
 
-    public Pokemon PokeId(int PokeId) {
-        setPokeId(PokeId);
-        return this;
+    public int getEvoReq() {
+        return this.evoReq;
     }
 
-    public Pokemon id(int id) {
-        setId(id);
+    public void setEvoReq(int evoReq) {
+        this.evoReq = evoReq;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Pokemon PokeId(int PokeId) {
+        setPokeId(PokeId);
         return this;
     }
 
@@ -266,6 +289,11 @@ public class Pokemon {
 
     public Pokemon nature(Nature nature) {
         setNature(nature);
+        return this;
+    }
+
+    public Pokemon base(Base base) {
+        setBase(base);
         return this;
     }
 
@@ -329,6 +357,16 @@ public class Pokemon {
         return this;
     }
 
+    public Pokemon evoReq(int evoReq) {
+        setEvoReq(evoReq);
+        return this;
+    }
+
+    public Pokemon id(int id) {
+        setId(id);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -337,25 +375,25 @@ public class Pokemon {
             return false;
         }
         Pokemon pokemon = (Pokemon) o;
-        return PokeId == pokemon.PokeId && id == pokemon.id && Objects.equals(Name, pokemon.Name) && Objects.equals(nickName, pokemon.nickName) && level == pokemon.level && Objects.equals(type1, pokemon.type1) && Objects.equals(type2, pokemon.type2) && Objects.equals(nature, pokemon.nature) && Objects.equals(iv, pokemon.iv) && Objects.equals(ev, pokemon.ev) && Objects.equals(ability, pokemon.ability) && Objects.equals(ability1, pokemon.ability1) && Objects.equals(ability2, pokemon.ability2) && Objects.equals(hiddenAbility, pokemon.hiddenAbility) && catchRate == pokemon.catchRate && genderRate == pokemon.genderRate && Objects.equals(eggGroup1, pokemon.eggGroup1) && Objects.equals(eggGroup2, pokemon.eggGroup2) && Objects.equals(item, pokemon.item) && Objects.equals(currentStatus, pokemon.currentStatus);
+        return PokeId == pokemon.PokeId && Objects.equals(Name, pokemon.Name) && Objects.equals(nickName, pokemon.nickName) && level == pokemon.level && Objects.equals(type1, pokemon.type1) && Objects.equals(type2, pokemon.type2) && Objects.equals(nature, pokemon.nature) && Objects.equals(base, pokemon.base) && Objects.equals(iv, pokemon.iv) && Objects.equals(ev, pokemon.ev) && Objects.equals(ability, pokemon.ability) && Objects.equals(ability1, pokemon.ability1) && Objects.equals(ability2, pokemon.ability2) && Objects.equals(hiddenAbility, pokemon.hiddenAbility) && catchRate == pokemon.catchRate && genderRate == pokemon.genderRate && Objects.equals(eggGroup1, pokemon.eggGroup1) && Objects.equals(eggGroup2, pokemon.eggGroup2) && Objects.equals(item, pokemon.item) && Objects.equals(currentStatus, pokemon.currentStatus) && evoReq == pokemon.evoReq && id == pokemon.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(PokeId, id, Name, nickName, level, type1, type2, nature, iv, ev, ability, ability1, ability2, hiddenAbility, catchRate, genderRate, eggGroup1, eggGroup2, item, currentStatus);
+        return Objects.hash(PokeId, Name, nickName, level, type1, type2, nature, base, iv, ev, ability, ability1, ability2, hiddenAbility, catchRate, genderRate, eggGroup1, eggGroup2, item, currentStatus, evoReq, id);
     }
 
     @Override
     public String toString() {
         return "{" +
             " PokeId='" + getPokeId() + "'" +
-            ", id='" + getId() + "'" +
             ", Name='" + getName() + "'" +
             ", nickName='" + getNickName() + "'" +
             ", level='" + getLevel() + "'" +
             ", type1='" + getType1() + "'" +
             ", type2='" + getType2() + "'" +
             ", nature='" + getNature() + "'" +
+            ", base='" + getBase() + "'" +
             ", iv='" + getIv() + "'" +
             ", ev='" + getEv() + "'" +
             ", ability='" + getAbility() + "'" +
@@ -368,7 +406,11 @@ public class Pokemon {
             ", eggGroup2='" + getEggGroup2() + "'" +
             ", item='" + getItem() + "'" +
             ", currentStatus='" + getCurrentStatus() + "'" +
+            ", evoReq='" + getEvoReq() + "'" +
+            ", id='" + getId() + "'" +
             "}";
     }
+
+
 
 }

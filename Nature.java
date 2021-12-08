@@ -96,9 +96,6 @@ public class Nature {
         this.Speed = d;
     }
 
-    public void getAll(){
-        System.out.println(getName()+getAttack()+getDefense()+getHP()+getSpecialAttack()+getSpecialDefense()+getSpeed());
-    }
     String[] nature = {
     "Hardy","Lonely","Brave", "Naughty", "Bold","Docile",
     "Relaxed","Impish","Lax","Timid","Hasty","Serious",

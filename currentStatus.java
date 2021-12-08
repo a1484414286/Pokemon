@@ -14,21 +14,27 @@ public class currentStatus extends Pokemon{
     private int currentSpecialDefense;
     private int currentSpeed;
 
-    public currentStatus(int Level, Nature nature, IV iv, EV ev) {
+    public currentStatus(int Level,Base base, Nature nature, IV iv, EV ev) {
         super(Level, nature, iv, ev);
         this.HP = ((2*super.getIv().getHP()+super.getEv().getHP()/4)*super.getLevel()/100)+super.getLevel()+10;
-        this.Attack = super.getIv().getAttack();
+        this.Attack =  (int)Math.floor((((((2*super.getBase().getAttack()+iv.getAttack()+(ev.getAttack()/4))*Level)/100)+5)*nature.getAttack()));
         this.Defense = super.getIv().getDefense();
         this.SpecialAttack = super.getIv().getSpecialAttack();
         this.SpecialDefense = super.getIv().getSpecialDefense();
         this.Speed = super.getIv().getSpeed();
-        this.currentHP = HP;
+        this.currentHP = this.HP;
         this.currentAttack = Attack;
         this.currentDefense = Defense;
         this.currentSpecialAttack = SpecialAttack;
         this.currentSpecialDefense = SpecialDefense;
         this.currentSpeed = Speed;
     }
+
+    // public int levelUp(int Base, int IV, int EV, int Level, Nature nature){
+    //     int i;
+    //     i =(int) Math.floor((((((2*Base+IV+(EV/4))*Level)/100)+5)*1.1));
+    //     return i;
+    // }
 
     public int getHP() {
         return this.HP;

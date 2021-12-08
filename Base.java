@@ -1,7 +1,6 @@
 import java.util.Objects;
-import java.util.Random;
 
-public class IV {
+public class Base {
     private int HP;
     private int Attack;
     private int Defense;
@@ -9,17 +8,7 @@ public class IV {
     private int SpecialDefense;
     private int Speed;
 
-    public IV(boolean shiny) {
-        this.HP = !shiny ? new Random().nextInt(32) : 20;
-        this.Attack = new Random().nextInt(32);
-        this.Defense = new Random().nextInt(32);
-        this.SpecialAttack = new Random().nextInt(32);
-        this.SpecialDefense = new Random().nextInt(32);
-        this.Speed = new Random().nextInt(32);
-    }
-
-
-    public IV(int HP, int Attack, int Defense, int SpecialAttack, int SpecialDefense, int Speed) {
+    public Base(int HP, int Attack, int Defense, int SpecialAttack, int SpecialDefense, int Speed) {
         this.HP = HP;
         this.Attack = Attack;
         this.Defense = Defense;
@@ -27,8 +16,6 @@ public class IV {
         this.SpecialDefense = SpecialDefense;
         this.Speed = Speed;
     }
-
-
 
     public int getHP() {
         return this.HP;
@@ -78,32 +65,32 @@ public class IV {
         this.Speed = Speed;
     }
 
-    public IV HP(int HP) {
+    public Base HP(int HP) {
         setHP(HP);
         return this;
     }
 
-    public IV Attack(int Attack) {
+    public Base Attack(int Attack) {
         setAttack(Attack);
         return this;
     }
 
-    public IV Defense(int Defense) {
+    public Base Defense(int Defense) {
         setDefense(Defense);
         return this;
     }
 
-    public IV SpecialAttack(int SpecialAttack) {
+    public Base SpecialAttack(int SpecialAttack) {
         setSpecialAttack(SpecialAttack);
         return this;
     }
 
-    public IV SpecialDefense(int SpecialDefense) {
+    public Base SpecialDefense(int SpecialDefense) {
         setSpecialDefense(SpecialDefense);
         return this;
     }
 
-    public IV Speed(int Speed) {
+    public Base Speed(int Speed) {
         setSpeed(Speed);
         return this;
     }
@@ -112,11 +99,11 @@ public class IV {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof IV)) {
+        if (!(o instanceof Base)) {
             return false;
         }
-        IV iV = (IV) o;
-        return HP == iV.HP && Attack == iV.Attack && Defense == iV.Defense && SpecialAttack == iV.SpecialAttack && SpecialDefense == iV.SpecialDefense && Speed == iV.Speed;
+        Base base = (Base) o;
+        return HP == base.HP && Attack == base.Attack && Defense == base.Defense && SpecialAttack == base.SpecialAttack && SpecialDefense == base.SpecialDefense && Speed == base.Speed;
     }
 
     @Override
@@ -136,5 +123,4 @@ public class IV {
             "}";
     }
 
-    
 }

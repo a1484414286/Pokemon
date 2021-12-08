@@ -1,5 +1,10 @@
 public enum eggGroup {
-    怪兽,人型,水中1,水中3,虫,矿物,
-    飞行,不定形,陆上,水中2 ,妖精,百变怪,
-    植物,龙,未发现,性别不明
+    Monster,Human_Like,
+    Water1,Water3,
+    Bug,Mineral,
+    Flying,Amorphous,
+    Field,Water2,
+    Fairy,Ditto,
+    Grass,Dragon,
+    No_Eggs_Discovered
 }
