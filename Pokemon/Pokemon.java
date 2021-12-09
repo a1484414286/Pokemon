@@ -1,8 +1,19 @@
+package Pokemon;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
-import java.util.jar.Attributes.Name;
+
+import Ability.Ability;
+import Ability.Moves;
+import Ability.Nature;
+import Items.heldItem;
+import Stats.Base;
+import Stats.EV;
+import Stats.IV;
+import Stats.currentStatus;
 
 public class Pokemon {
+    private ArrayList<Moves> moves;
     private int PokeId;
     private String Name;
     private String nickName;
@@ -19,6 +30,7 @@ public class Pokemon {
     private Ability hiddenAbility;
     private int catchRate;
     private float genderRate;
+    private Gender gender;
     private eggGroup eggGroup1;
     private eggGroup eggGroup2;
     private heldItem item;
@@ -28,38 +40,38 @@ public class Pokemon {
     private boolean shiny;
     public int ShinyRate = 2500;
 
-
-    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, IV iv, EV ev, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item,int evoReq) {
+    //hard-code for random wild pokemon
+    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, Ability ability, int catchRate, float genderRate, boolean gender,eggGroup eggGroup1, eggGroup eggGroup2, heldItem item) {
         this.PokeId = PokeId;
         this.id = id += 1;
         this.Name = Name;
+        this.moves = new ArrayList<>();
         this.nickName = Name;
         this.level = level;
         this.type1 = type1;
         this.type2 = type2;
         this.shiny = new Random().nextInt(ShinyRate) == 1 ? true : false; 
-        this.currentStatus = new currentStatus(level, base, nature, iv, ev);
-        this.nature = new Nature(23);
+        this.nature = new Nature(24);
         this.iv = new IV(shiny);
-        this.ev = ev;
-        this.ability1 = ability1;
-        this.ability2 = ability2;
-        this.hiddenAbility = hiddenAbility;
+        this.ev = new EV();
+        this.currentStatus = new currentStatus(level, base, nature, iv, ev);
+        this.ability = ability;
         this.catchRate = catchRate;
         this.genderRate = genderRate;
+        this.gender = genderRatio(genderRate);
         this.eggGroup1 = eggGroup1;
         this.eggGroup2 = eggGroup2;
         this.item = item;
-        this.evoReq = evoReq;
     }
 
 
-
-    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item, currentStatus currentStatus, int evoReq, int id) {
+    //hard-code for trainers
+    public Pokemon(int PokeId, String Name, ArrayList<Moves> moves, int level, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item, currentStatus currentStatus, int evoReq, int id) {
         this.PokeId = PokeId;
         this.id = id+=1;
         this.Name = Name;
         this.nickName = Name;
+        this.moves = moves;
         this.level = level;
         this.type1 = type1;
         this.type2 = type2;
@@ -68,9 +80,6 @@ public class Pokemon {
         this.iv = iv;
         this.ev = ev;
         this.ability = ability;
-        this.ability1 = ability1;
-        this.ability2 = ability2;
-        this.hiddenAbility = hiddenAbility;
         this.catchRate = catchRate;
         this.genderRate = genderRate;
         this.eggGroup1 = eggGroup1;
@@ -79,6 +88,71 @@ public class Pokemon {
         this.currentStatus = currentStatus;
         this.evoReq = evoReq;
         this.id = id;
+    }
+
+    //data base
+    public Pokemon(int PokeId, String Name, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, int evoReq) {
+        this.PokeId = PokeId;
+        this.id = id+=1;
+        this.Name = Name;
+        this.nickName = Name;
+        this.type1 = type1;
+        this.type2 = type2;
+        this.nature = new Nature(24);
+        this.base = base;
+        this.iv = iv;
+        this.ev = ev;
+        this.ability1 = ability1;
+        this.ability2 = ability2;
+        this.hiddenAbility = hiddenAbility;
+        this.catchRate = catchRate;
+        this.genderRate = genderRate;
+        this.eggGroup1 = eggGroup1;
+        this.eggGroup2 = eggGroup2;
+        this.evoReq = evoReq;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setMoves(ArrayList<Moves> moves) {
+        this.moves = moves;
+    }
+
+    public void setShiny(boolean shiny) {
+        this.shiny = shiny;
+    }
+
+    public void setShinyRate(int shinyRate) {
+        ShinyRate = shinyRate;
+    }
+    public ArrayList<Moves> getMoves() {
+        return moves;
+    }
+
+    public int getShinyRate() {
+        return ShinyRate;
+    }
+    
+    private Gender genderRatio(Float rate){
+        if(rate == 255){
+            return Gender.NONE;
+        }
+        else if(rate == 254){
+            return Gender.FEMALE;
+        }
+        else if(rate == 0){
+            return Gender.MALE;
+        }
+        else{
+            int G = new Random().nextInt(0,254);
+            return ( G >= rate ? Gender.FEMALE : Gender.MALE);
+        }
     }
 
     public int getPokeId() {
@@ -385,32 +459,36 @@ public class Pokemon {
 
     @Override
     public String toString() {
-        return "{" +
+        if(getName().equals(getNickName())){
+            return "{" +
+                " PokeId='" + getPokeId() + "'" +
+                ", 名字='" + getName() + "'" +
+                ", 等级='" + getLevel() + "'" +
+                ", 属性='" + getType1() + "'" +
+                ", 属性='" + getType2() + "'" +
+                ", 性格='" + getNature() + "'" +
+                ", 特性='" + getAbility() + "'" +
+                ", 性别='" + getGenderRate() + "'" +
+                ", 携带物='" + getItem() + "'" +
+                ", 状态='" + getCurrentStatus() + "'" +
+                ", 进化需要等级='" + getEvoReq() + "'" +
+                "}";
+        }
+        else{
+            return "{" +
             " PokeId='" + getPokeId() + "'" +
-            ", Name='" + getName() + "'" +
-            ", nickName='" + getNickName() + "'" +
-            ", level='" + getLevel() + "'" +
-            ", type1='" + getType1() + "'" +
-            ", type2='" + getType2() + "'" +
-            ", nature='" + getNature() + "'" +
-            ", base='" + getBase() + "'" +
-            ", iv='" + getIv() + "'" +
-            ", ev='" + getEv() + "'" +
-            ", ability='" + getAbility() + "'" +
-            ", ability1='" + getAbility1() + "'" +
-            ", ability2='" + getAbility2() + "'" +
-            ", hiddenAbility='" + getHiddenAbility() + "'" +
-            ", catchRate='" + getCatchRate() + "'" +
-            ", genderRate='" + getGenderRate() + "'" +
-            ", eggGroup1='" + getEggGroup1() + "'" +
-            ", eggGroup2='" + getEggGroup2() + "'" +
-            ", item='" + getItem() + "'" +
-            ", currentStatus='" + getCurrentStatus() + "'" +
-            ", evoReq='" + getEvoReq() + "'" +
-            ", id='" + getId() + "'" +
+            ", 名字='" + getNickName() + "'" +
+            ", 等级='" + getLevel() + "'" +
+            ", 属性='" + getType1() + "'" +
+            ", 属性='" + getType2() + "'" +
+            ", 性格='" + getNature() + "'" +
+            ", 特性='" + getAbility() + "'" +
+            ", 性别='" + getGenderRate() + "'" +
+            ", 携带物='" + getItem() + "'" +
+            ", 状态='" + getCurrentStatus() + "'" +
+            ", 进化需要等级='" + getEvoReq() + "'" +
             "}";
+        }
     }
-
-
 
 }

@@ -170,7 +170,6 @@ public class Nature {
             case "Impish":
                 this.setDefense(p);
                 this.setSpecialDefense(m);
-
             case 
             default : break;
         }

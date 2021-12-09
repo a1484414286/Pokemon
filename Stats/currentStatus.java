@@ -1,4 +1,7 @@
+package Stats;
 import java.util.Objects;
+
+import Ability.Nature;
 
 public class currentStatus{
     private int HP;
@@ -13,6 +16,8 @@ public class currentStatus{
     private int currentSpecialAttack;
     private int currentSpecialDefense;
     private int currentSpeed;
+    private int crit;
+    private double accuracy;
 
     public currentStatus(int level,Base base, Nature nature, IV iv, EV ev) {
         this.HP = ((2*iv.getHP()+ev.getHP()/4)*level/100)+level+10;
@@ -27,7 +32,10 @@ public class currentStatus{
         this.currentSpecialAttack = SpecialAttack;
         this.currentSpecialDefense = SpecialDefense;
         this.currentSpeed = Speed;
+        this.crit = 0;
+        this.accuracy = 100.0;
     }
+
 
     public int getHP() {
         return this.HP;
@@ -125,6 +133,22 @@ public class currentStatus{
         this.currentSpeed = currentSpeed;
     }
 
+    public int getCrit() {
+        return this.crit;
+    }
+
+    public void setCrit(int crit) {
+        this.crit = crit;
+    }
+
+    public double getAccuracy() {
+        return this.accuracy;
+    }
+
+    public void setAccuracy(double accuracy) {
+        this.accuracy = accuracy;
+    }
+
     public currentStatus HP(int HP) {
         setHP(HP);
         return this;
@@ -185,6 +209,16 @@ public class currentStatus{
         return this;
     }
 
+    public currentStatus crit(int crit) {
+        setCrit(crit);
+        return this;
+    }
+
+    public currentStatus accuracy(double accuracy) {
+        setAccuracy(accuracy);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -193,15 +227,13 @@ public class currentStatus{
             return false;
         }
         currentStatus currentStatus = (currentStatus) o;
-        return HP == currentStatus.HP && Attack == currentStatus.Attack && Defense == currentStatus.Defense && SpecialAttack == currentStatus.SpecialAttack && SpecialDefense == currentStatus.SpecialDefense && Speed == currentStatus.Speed && currentHP == currentStatus.currentHP && currentAttack == currentStatus.currentAttack && currentDefense == currentStatus.currentDefense && currentSpecialAttack == currentStatus.currentSpecialAttack && currentSpecialDefense == currentStatus.currentSpecialDefense && currentSpeed == currentStatus.currentSpeed;
+        return HP == currentStatus.HP && Attack == currentStatus.Attack && Defense == currentStatus.Defense && SpecialAttack == currentStatus.SpecialAttack && SpecialDefense == currentStatus.SpecialDefense && Speed == currentStatus.Speed && currentHP == currentStatus.currentHP && currentAttack == currentStatus.currentAttack && currentDefense == currentStatus.currentDefense && currentSpecialAttack == currentStatus.currentSpecialAttack && currentSpecialDefense == currentStatus.currentSpecialDefense && currentSpeed == currentStatus.currentSpeed && crit == currentStatus.crit && accuracy == currentStatus.accuracy;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed, currentHP, currentAttack, currentDefense, currentSpecialAttack, currentSpecialDefense, currentSpeed);
+        return Objects.hash(HP, Attack, Defense, SpecialAttack, SpecialDefense, Speed, currentHP, currentAttack, currentDefense, currentSpecialAttack, currentSpecialDefense, currentSpeed, crit, accuracy);
     }
-
-
 
     @Override
     public String toString() {
@@ -218,6 +250,8 @@ public class currentStatus{
             ", currentSpecialAttack='" + getCurrentSpecialAttack() + "'" +
             ", currentSpecialDefense='" + getCurrentSpecialDefense() + "'" +
             ", currentSpeed='" + getCurrentSpeed() + "'" +
+            ", crit='" + getCrit() + "'" +
+            ", accuracy='" + getAccuracy() + "'" +
             "}";
     }
 
