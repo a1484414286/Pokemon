@@ -6,7 +6,7 @@ import java.util.Random;
 import Ability.Ability;
 import Ability.Moves;
 import Ability.Nature;
-import Items.heldItem;
+import Items.Items;
 import Stats.Base;
 import Stats.EV;
 import Stats.IV;
@@ -33,7 +33,7 @@ public class Pokemon {
     private Gender gender;
     private eggGroup eggGroup1;
     private eggGroup eggGroup2;
-    private heldItem item;
+    private Items item;
     private currentStatus currentStatus;
     private int evoReq;
     public int id = 0;
@@ -41,11 +41,11 @@ public class Pokemon {
     public int ShinyRate = 2500;
 
     //hard-code for random wild pokemon
-    public Pokemon(int PokeId, String Name, int level, Type type1, Type type2, Ability ability, int catchRate, float genderRate, boolean gender,eggGroup eggGroup1, eggGroup eggGroup2, heldItem item) {
+    public Pokemon(int PokeId, String Name, ArrayList<Moves> move, int level, Type type1, Type type2, Ability ability, int catchRate, float genderRate, boolean gender,eggGroup eggGroup1, eggGroup eggGroup2, Items item) {
         this.PokeId = PokeId;
         this.id = id += 1;
         this.Name = Name;
-        this.moves = new ArrayList<>();
+        this.moves = move;
         this.nickName = Name;
         this.level = level;
         this.type1 = type1;
@@ -66,7 +66,7 @@ public class Pokemon {
 
 
     //hard-code for trainers
-    public Pokemon(int PokeId, String Name, ArrayList<Moves> moves, int level, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, heldItem item, currentStatus currentStatus, int evoReq, int id) {
+    public Pokemon(int PokeId, String Name, ArrayList<Moves> moves, int level, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, Items item, currentStatus currentStatus, int evoReq, int id) {
         this.PokeId = PokeId;
         this.id = id+=1;
         this.Name = Name;
@@ -91,17 +91,14 @@ public class Pokemon {
     }
 
     //data base
-    public Pokemon(int PokeId, String Name, Type type1, Type type2, Nature nature, Base base, IV iv, EV ev, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, int evoReq) {
+    public Pokemon(int PokeId, String Name, Type type1, Type type2, Base base, Ability ability1, Ability ability2, Ability hiddenAbility, int catchRate, float genderRate, eggGroup eggGroup1, eggGroup eggGroup2, int evoReq) {
         this.PokeId = PokeId;
         this.id = id+=1;
         this.Name = Name;
         this.nickName = Name;
         this.type1 = type1;
         this.type2 = type2;
-        this.nature = new Nature(24);
         this.base = base;
-        this.iv = iv;
-        this.ev = ev;
         this.ability1 = ability1;
         this.ability2 = ability2;
         this.hiddenAbility = hiddenAbility;
@@ -299,11 +296,11 @@ public class Pokemon {
         this.eggGroup2 = eggGroup2;
     }
 
-    public heldItem getItem() {
+    public Items getItem() {
         return this.item;
     }
 
-    public void setItem(heldItem item) {
+    public void setItem(Items item) {
         this.item = item;
     }
 
@@ -421,7 +418,7 @@ public class Pokemon {
         return this;
     }
 
-    public Pokemon item(heldItem item) {
+    public Pokemon item(Items item) {
         setItem(item);
         return this;
     }

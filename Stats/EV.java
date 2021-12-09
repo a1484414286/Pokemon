@@ -1,3 +1,4 @@
+package Stats;
 import java.util.Objects;
 
 public class EV{

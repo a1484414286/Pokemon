@@ -1,5 +1,18 @@
+package Pokemon;
+
 public enum Type {
-    一般,火,水,电,草,冰,
-    格斗,毒,地面,飞行,超能力,
-    虫,岩石,幽灵,龙,恶,钢,妖精
+   					
+    Normal	 ,Fire,
+    Fighting ,Water,
+    Flying	 ,Grass,
+    Poison	 ,Electric,
+    Ground	 ,Psychic,
+    Rock	 ,Ice,
+    Bug	     ,Dragon,
+    Ghost	 ,Dark,
+    Steel	 ,Fairy,
+    PokeBall,Medicine,Berry,
+    Key_Item,TM,HM,Vitamin,
+    
+
 }

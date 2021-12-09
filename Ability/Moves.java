@@ -12,18 +12,19 @@ public class Moves {
     private Type type;
     private String description;
     private float accuracy;
-    public Moves(int pokeId, int level) {
-        
+    
+
+    public Moves() {
     }
 
-
-    public Moves(String name, int DMG, int dmgType, int pp, Type type, String description) {
+    public Moves(String name, int DMG, int dmgType, int pp, Type type, String description, float accuracy) {
         this.name = name;
         this.DMG = DMG;
         this.dmgType = dmgType;
         this.pp = pp;
         this.type = type;
         this.description = description;
+        this.accuracy = accuracy;
     }
 
     public String getName() {
@@ -74,6 +75,14 @@ public class Moves {
         this.description = description;
     }
 
+    public float getAccuracy() {
+        return this.accuracy;
+    }
+
+    public void setAccuracy(float accuracy) {
+        this.accuracy = accuracy;
+    }
+
     public Moves name(String name) {
         setName(name);
         return this;
@@ -104,6 +113,11 @@ public class Moves {
         return this;
     }
 
+    public Moves accuracy(float accuracy) {
+        setAccuracy(accuracy);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -112,12 +126,12 @@ public class Moves {
             return false;
         }
         Moves moves = (Moves) o;
-        return Objects.equals(name, moves.name) && DMG == moves.DMG && dmgType == moves.dmgType && pp == moves.pp && Objects.equals(type, moves.type) && Objects.equals(description, moves.description);
+        return Objects.equals(name, moves.name) && DMG == moves.DMG && dmgType == moves.dmgType && pp == moves.pp && Objects.equals(type, moves.type) && Objects.equals(description, moves.description) && accuracy == moves.accuracy;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, DMG, dmgType, pp, type, description);
+        return Objects.hash(name, DMG, dmgType, pp, type, description, accuracy);
     }
 
     @Override
@@ -129,6 +143,7 @@ public class Moves {
             ", pp='" + getPp() + "'" +
             ", type='" + getType() + "'" +
             ", description='" + getDescription() + "'" +
+            ", accuracy='" + getAccuracy() + "'" +
             "}";
     }
 

@@ -1,3 +1,4 @@
+package Ability;
 import java.util.Random;
 
 public class Nature {

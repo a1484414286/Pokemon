@@ -1,3 +1,4 @@
+package Pokemon;
 public enum eggGroup {
     Monster,Human_Like,
     Water1,Water3,
